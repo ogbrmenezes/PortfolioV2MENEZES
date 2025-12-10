@@ -840,6 +840,34 @@ body.light .section, body.light-theme .section { background: var(--bg-light); co
 
 .timeline-item p { color: #ffffff; line-height: 1.5; }
 
+
+
+.career-section { display:flex; flex-direction:column; gap:18px; }
+.career-subtitle { color: var(--text-secondary, #cfcfcf); font-size:1rem; }
+.career-grid { display:grid; grid-template-columns:260px 1fr; gap:20px; align-items:start; }
+.career-list { display:flex; flex-direction:column; background:#0f0f11; border:1px solid #1f1f22; border-radius:12px; overflow:hidden; }
+.career-tab { text-align:left; padding:12px 14px; border:none; background:transparent; color:#888; cursor:pointer; border-left:3px solid transparent; transition:background .2s,color .2s,border-color .2s; font-weight:600; }
+.career-tab:hover { color:#fff; background:rgba(255,140,0,.06); }
+.career-tab.active { color:var(--orange); background:rgba(255,140,0,.08); border-color:var(--orange); }
+.career-content { background:#0f0f11; border:1px solid #1f1f22; border-radius:14px; padding:18px 20px; box-shadow:0 20px 40px rgba(0,0,0,.25); }
+.career-card { display:none; color:#dcdcdc; }
+.career-card.active { display:block; }
+.career-card h3 { font-size:1.3rem; margin-bottom:8px; color:var(--orange); }
+.career-period { color:#9ea0a6; font-weight:600; letter-spacing:.5px; margin-bottom:12px; }
+.career-bullets { list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+.career-bullets li { position:relative; padding-left:18px; line-height:1.5; }
+.career-bullets li::before { content:'•'; position:absolute; left:0; color:var(--orange); }
+@media (max-width:960px) {
+  .career-grid { grid-template-columns:1fr; }
+  .career-list { flex-direction:row; overflow-x:auto; }
+  .career-tab { flex:1 0 auto; white-space:nowrap; border-left:none; border-bottom:3px solid transparent; }
+  .career-tab.active { border-bottom-color:var(--orange); }
+}
+
+
+/* ------------------------------
+   Carreira (tabs estilo linha do tempo)
+   ------------------------------ */
 /* ------------------------------
    Contato
    ------------------------------ */

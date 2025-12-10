@@ -64,11 +64,15 @@
                         </a>
                     </div>
                 </div>
-            </div>
+
+             
+
+                    
+                    
         </section>
 
         <section id="sobre" class="section">
-            <div class="section-container">
+            <div class="section-container career-section">
                 <div class="sobre-container">
                     <img src="assets/img/futurp.jpeg" class="sobre-foto" alt="Foto de Gabriel Menezes">
                     <div class="sobre-texto">
@@ -210,7 +214,7 @@
                             </div>
                         </article>
                         <article class="project-slide prev" data-index="2">
-                            <div class="project-thumb" style="background-image: linear-gradient(180deg, rgba(255,140,0,0.08), rgba(0,0,0,0.7)), url('assets/img/kanban.png"></div>
+                            <div class="project-thumb" style="background-image: linear-gradient(180deg, rgba(255,140,0,0.08), rgba(0,0,0,0.7)), url('assets/img/kanban.png')"></div>
                             <div class="project-body">
                                 <h3>Zhaz Controle</h3>
                                 <p>Kanban da empresa</p>
@@ -230,24 +234,63 @@
         </section>
 
         <section id="carreira" class="section">
-            <div class="section-container">
-                <h2>Carreira</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <span class="timeline-year">2025 / 2026 - Atual</span>
-                        <p>Arquitetura de soluções & Responsavel pela homologação de produtos, entender o que o cliente precisa para sua estrutura e apoiar da melhor maneira </p>
-                    </div>
-                    <div class="timeline-item">
-                        <span class="timeline-year">2024 / 2025 até mês 07 : Analista de suporte Americanas, resolvendo chamados </span>
-                        <p>Atuação no projeto de rollout de coletores Android para o cliente Assaí, com foco em MDM Urmobo e dispositivos Android.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <span class="timeline-year">2022 / 2023 </span>
-                        <p> Suporte direcionado ao cliente Americanas pela empresa Tecnocomp, responsavel pelo contrado de : Lojas / Micro </p>
-                    </div>
-                </div>
+    <div class="section-container career-section">
+        <h2>Carreira</h2>
+        <p class="career-subtitle">Minha experiência profissional e responsabilidades recentes.</p>
+
+        <div class="career-grid">
+            <div class="career-list" role="tablist" aria-label="Experiências">
+                <button class="career-tab active" data-target="exp-americanas" role="tab" aria-selected="true">Zhaz Soluçôes / AQS </button>
+                <button class="career-tab active" data-target="exp-americanas" role="tab" aria-selected="true">Zhaz Soluçôes / Analista de suporte</button>
+                <button class="career-tab" data-target="exp-assai" role="tab" aria-selected="false">Tecnocomp</button>
+                <button class="career-tab" data-target="exp-tecnocomp" role="tab" aria-selected="false">Sonda</button>
             </div>
-        </section>
+
+            <div class="career-content">
+                
+                 <article class="career-card active" id="exp-americanas" role="tabpanel">
+                    <h3>Arquitetura de soluçôes</h3>
+                    <p class="career-period"> 2026 — Promovido</p>
+                    <ul class="career-bullets">
+                        <li>Homologação de produtos  & entendimento da operação do cliente.</li>
+                        <li>Apoio a equipe dev e analistas... passando informações sobre propriedades do cliente.</li>
+                        <li>Automatização de tarefas atraves de python ... trazendo velocidade para operação </li>
+                    </ul>
+                </article>
+
+                <article class="career-card active" id="exp-americanas" role="tabpanel">
+                    <h3>Analista de Suporte N2 Americanas</h3>
+                    <p class="career-period">2025 — Até Dezembro </p>
+                    <ul class="career-bullets">
+                        <li>Suporte remoto aos chamados da americanas, coletores de dados.</li>
+                        <li>Gestão e priorização de chamados críticos, garantindo estabilidade do contrato.</li>
+                        <li>Automatização de tarefas atraves de python ... trazendo velocidade para operação </li>
+                    </ul>
+                </article>
+
+                <article class="career-card" id="exp-assai" role="tabpanel" hidden>
+                    <h3>Analistaa de Suporte - Americanas</h3>
+                    <p class="career-period">2023 — 2024</p>
+                    <ul class="career-bullets">
+                        <li>Suporte remoto de PDV.</li>
+                        <li>Suporte remoto de Micro</li>
+                        <li>Criação de laudo de peça para requisição </li>
+                    </ul>
+                </article>
+
+                <article class="career-card" id="exp-tecnocomp" role="tabpanel" hidden>
+                    <h3>Suporte Técnico @ Tecnocomp / Americanas</h3>
+                    <p class="career-period">2022 — 2023</p>
+                    <ul class="career-bullets">
+                        <li>Instalação de Imagem e configuração dos notebooks.</li>
+                        <li>Atualização de compliance : GPUPDATE </li>
+                        <li>Configuração de dominio e vpn</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
 
         <section id="contato" class="section">
             <div class="section-container">

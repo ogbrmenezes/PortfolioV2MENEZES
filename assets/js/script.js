@@ -164,4 +164,23 @@
 
     if (btnPrev) btnPrev.addEventListener('click', () => scrollToOffset(-1));
     if (btnNext) btnNext.addEventListener('click', () => scrollToOffset(1));
+
+        // Tabs da Carreira
+    const careerTabs = document.querySelectorAll('.career-tab');
+    const careerCards = document.querySelectorAll('.career-card');
+
+    const activateCareer = (targetId) => {
+        careerTabs.forEach((btn) => btn.classList.toggle('active', btn.dataset.target === targetId));
+        careerCards.forEach((card) => {
+            const isActive = card.id === targetId;
+            card.classList.toggle('active', isActive);
+            if (isActive) card.removeAttribute('hidden'); else card.setAttribute('hidden','hidden');
+        });
+    };
+
+    careerTabs.forEach((btn) => {
+        btn.addEventListener('click', () => activateCareer(btn.dataset.target));
+    });
+
+
 })();
