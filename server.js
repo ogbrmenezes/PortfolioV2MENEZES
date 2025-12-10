@@ -1,9 +1,14 @@
 const express = require('express');
-const path = require('path');
+const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
 app.use(express.json());
+
+// 🔥 Habilita CORS para que o GitHub Pages possa acessar a API
+app.use(cors({
+  origin: "*", // Se quiser, posso deixar mais seguro depois
+}));
 
 const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) {
@@ -84,16 +89,10 @@ app.post('/api/chat-gemini', async (req, res) => {
   }
 });
 
-// Arquivos estáticos (index.html, assets, etc.)
-app.use(express.static(path.join(__dirname)));
-
-// SPA fallback
-app.get('*', (req, res, next) => {
-  if (req.path.startsWith('/api/')) return next();
-  return res.sendFile(path.join(__dirname, 'index.html'));
-});
+// 🔥 Removemos express.static e o fallback do index.html
+// Porque o Render será APENAS backend
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor Gemini rodando em http://localhost:${PORT}`);
+  console.log(`Servidor Gemini rodando na porta ${PORT}`);
 });
