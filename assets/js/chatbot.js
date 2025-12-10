@@ -7,7 +7,7 @@
     const btnClose = document.querySelector('.chatbot-close');
     const btnClear = document.querySelector('.chatbot-clear');
 
-    const API_URL = '/api/chat-gemini';
+const API_URL = 'https://ogbrmenezesportfolio.onrender.com/api/chat-gemini';
     let busy = false;
     let history = [];
 
