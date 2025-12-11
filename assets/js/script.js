@@ -183,4 +183,55 @@
     });
 
 
+    // Visualiza‡Æo ampliada de feedback
+    const feedbackModal = document.getElementById('feedback-lightbox');
+    const feedbackModalImg = document.querySelector('[data-feedback-img]');
+    const feedbackModalCaption = document.querySelector('[data-feedback-caption]');
+    const feedbackCloseEls = document.querySelectorAll('[data-feedback-close]');
+
+    const closeFeedback = () => {
+        if (!feedbackModal) return;
+        feedbackModal.classList.remove('open');
+        feedbackModal.setAttribute('hidden', 'hidden');
+        document.body.style.overflow = '';
+    };
+
+    const openFeedback = (imgEl) => {
+        if (!feedbackModal || !feedbackModalImg) return;
+        feedbackModalImg.src = imgEl.src;
+        feedbackModalImg.alt = imgEl.alt || 'Feedback ampliado';
+        const name = imgEl.closest('.feedback-card')?.querySelector('.feedback-meta h3')?.textContent?.trim() || '';
+        if (feedbackModalCaption) {
+            feedbackModalCaption.textContent = name ? `Feedback de ${name}` : 'Feedback';
+        }
+        feedbackModal.classList.add('open');
+        feedbackModal.removeAttribute('hidden');
+        document.body.style.overflow = 'hidden';
+    };
+
+    document.querySelectorAll('[data-feedback-open]').forEach((img) => {
+        img.addEventListener('click', () => openFeedback(img));
+        img.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openFeedback(img);
+            }
+        });
+    });
+
+    feedbackCloseEls.forEach((el) => el.addEventListener('click', closeFeedback));
+
+    if (feedbackModal) {
+        feedbackModal.addEventListener('click', (event) => {
+            if (event.target === feedbackModal || event.target.dataset.feedbackClose !== undefined) {
+                closeFeedback();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeFeedback();
+        }
+    });
 })();

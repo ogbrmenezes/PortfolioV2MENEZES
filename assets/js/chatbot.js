@@ -24,6 +24,12 @@
     const BLOCKED_KEYWORDS = ['django', 'aws', 'amazon web services', 'spark', 'big data', 'gcp', 'google cloud', 'azure', 'kubernetes', 'terraform', 'devops cloud'];
     const ROLE_KEYWORDS = ['setor', 'atua', 'atuando', 'trabalha', 'cargo', 'funcao', 'hoje', 'agora'];
     const ROLE_ANSWER = 'Gabriel atua como Arquiteto de Solucoes, focado em integracoes, automacao, estabilidade e eficiencia (Python/APIs/automacao) para operacoes de varejo e logistica.';
+    const SKILL_KEYWORDS = ['skill', 'skills', 'habilidade', 'habilidades', 'competencia', 'competencias', 'tech', 'tecnologia', 'tecnologias', 'stack', 'stacks'];
+    const SKILL_ANSWER = 'Skills do Gabriel: Backend (Python, Flask, APIs, SQL, Automacao); Frontend (HTML, CSS, JavaScript, responsivo); Infra/Suporte (Redes, ITIL, GLPI/ServiceNow, Service Aide, MDM, Android).';
+    const CAREER_KEYWORDS = ['carreira', 'experiencia', 'historico', 'trajetoria', 'curriculo', 'cv', 'profissional', 'resumo'];
+    const CAREER_ANSWER = 'Carreira: Analista de Suporte N2 na Americanas (2023-2025) com automacoes em Python; Arquiteto de Solucoes a partir de 2026 (homologacao de produtos, apoio a desenvolvimento e suporte, desenho de integracoes e automacao).';
+    const CONTACT_KEYWORDS = ['contato', 'email', 'e-mail', 'mail', 'linkedin', 'github', 'telefone', 'whatsapp', 'whats', 'zap'];
+    const CONTACT_ANSWER = 'Contatos do Gabriel Menezes: E-mail: ogabrieldemenezes@gmail.com | GitHub: github.com/ogbrmenezes | LinkedIn: linkedin.com/in/ogabrielmenezes';
 
     let busy = false;
     let history = [{ role: 'system', content: SYSTEM_PROMPT }];
@@ -58,6 +64,9 @@
         if (!text || busy) return;
         const lowerQuestion = text.toLowerCase();
         const askedRoleDirect = ROLE_KEYWORDS.some((kw) => lowerQuestion.includes(kw));
+        const askedContact = CONTACT_KEYWORDS.some((kw) => lowerQuestion.includes(kw));
+        const askedSkills = SKILL_KEYWORDS.some((kw) => lowerQuestion.includes(kw));
+        const askedCareer = CAREER_KEYWORDS.some((kw) => lowerQuestion.includes(kw));
 
         addMessage(text, 'user');
         history.push({ role: 'user', content: text });
@@ -66,6 +75,27 @@
         if (askedRoleDirect) {
             addMessage(ROLE_ANSWER, 'bot');
             history.push({ role: 'assistant', content: ROLE_ANSWER });
+            busy = false;
+            return;
+        }
+
+        if (askedContact) {
+            addMessage(CONTACT_ANSWER, 'bot');
+            history.push({ role: 'assistant', content: CONTACT_ANSWER });
+            busy = false;
+            return;
+        }
+
+        if (askedSkills) {
+            addMessage(SKILL_ANSWER, 'bot');
+            history.push({ role: 'assistant', content: SKILL_ANSWER });
+            busy = false;
+            return;
+        }
+
+        if (askedCareer) {
+            addMessage(CAREER_ANSWER, 'bot');
+            history.push({ role: 'assistant', content: CAREER_ANSWER });
             busy = false;
             return;
         }
@@ -80,17 +110,18 @@
             });
             const data = await resp.json();
             setTyping(false);
-            const rawReply = data?.reply || data?.error || '';
+            const apiError = data?.error;
+            const rawReply = data?.reply || '';
             const lower = (rawReply || '').toLowerCase();
             const hasBlocked = BLOCKED_KEYWORDS.some((kw) => lower.includes(kw));
-            const reply = (!rawReply || rawReply.includes('[Insira') || rawReply.includes('[insira') || hasBlocked)
-                ? FALLBACK_REPLY
-                : rawReply;
+            const shouldFallback = !rawReply || rawReply.includes('[Insira') || rawReply.includes('[insira') || hasBlocked || apiError;
+            const reply = shouldFallback ? FALLBACK_REPLY : rawReply;
             addMessage(reply, 'bot');
             history.push({ role: 'assistant', content: reply });
         } catch (err) {
             setTyping(false);
-            addMessage('Erro ao conectar com a IA.', 'bot');
+            addMessage(FALLBACK_REPLY, 'bot');
+            history.push({ role: 'assistant', content: FALLBACK_REPLY });
         } finally {
             busy = false;
         }
